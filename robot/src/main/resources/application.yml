@@ -1,0 +1,47 @@
+
+spring:
+  datasource:
+#  如果存在多个数据源，监控可以通过名字来区分开
+    name: mysql
+#  连接数据库的url
+    url: jdbc:mysql://localhost:3306/robot?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+#  连接数据库的账号
+    username: root
+#  连接数据库的密码
+    password: root
+#    使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+#    扩展插件
+#    监控统计用的filter:stat日志用的filter:log4j 防御sql注入的filter：wall
+    druid:
+      filters: stat
+#    最大连接池数量
+      max-active: 20
+#      初始化时建立物理连接的个数，初始化发生在显示调用init方法，或者第一次getConnection时
+      initial-size: 1
+#      获取连接时最大等待时间，单位毫秒
+      max-wait: 60000
+#      最小连接池数量
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+#      连接保持空闲而不被驱逐的最长时间
+      min-evictable-idle-time-millis: 30000
+#      用来检测连接是否有效的sql，要求是一个查询语句
+#      如果validation-query为null,
+      validation-query: select count(1) from 'table'
+#      申请连接时间检测，如果空闲时间大于timeBetweenEvicationRunsMillis,执行validationQuery检测连接是否有效
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      max-open-prepared-statements: -1
+
+#pagehelper分页插件
+pagehelper:
+#     数据库的方言
+  helper-dialect: mysql
+#      启用合理化，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
+  reasonable: true
+mybatis:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: com.ozx.robot.mapper

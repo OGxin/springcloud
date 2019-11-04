@@ -1,0 +1,13 @@
+server:
+  port: 9761
+spring:
+  application:
+    name: springcloud-eureka-version
+eureka:
+  client:
+    service-url:
+      defaultZone : http://${eureka.instance.hostname}:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    hostname: 127.0.0.1
